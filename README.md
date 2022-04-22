@@ -17,18 +17,20 @@ Fiz esse projeto para expor um pouco do meu conhecimento em armazenamento de inf
 
 ## Quer Testar?
 - => https://gitmongo.herokuapp.com/
-## Git clone? Siga esse passos
-
-- => Dentro da pasta de um yarn install ou npm install
-- => Crie um arquivo chamado .env e adicione DB_URL="HOST DO SEU BANCO MONGODB"
-- => De um yarn dev ou npm dev
-
 ## As Rotas
 
 - => /register Para cadastrar um usuario 
 - => /all Para ver todos usuarios cadastrados
 - => /update/:id Para atualizar um usuario pelo id
 - => /delete/:id Para deletar um usuario pelo id
+
+## Git clone? Siga esse passos
+
+- => Dentro da pasta de um yarn install ou npm install
+- => Crie um arquivo chamado .env e adicione DB_URL="HOST DO SEU BANCO MONGODB"
+- => De um yarn dev ou npm dev
+
+
 
 ## Recursos
 
