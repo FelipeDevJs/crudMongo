@@ -3,10 +3,7 @@ const app = express()
 const cors = require('cors')
 
 //cors
-const corsOptions = {
-  origin: 'https://vite-qila8wr31-felipe-gmailcom.vercel.app'
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 //db
 const db = require('./config/db')
