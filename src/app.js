@@ -1,5 +1,14 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
+
+//cors
+const corsOptions = {
+  origin: ['https://vite-umber-six.vercel.app/', 'https://vite-umber-six.vercel.app/all']
+};
+app.use(cors(corsOptions));
+
+
 
 //db
 const db = require('./config/db')
