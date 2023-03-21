@@ -4,11 +4,9 @@ const cors = require('cors')
 
 //cors
 const corsOptions = {
-  origin: ['https://vite-umber-six.vercel.app/', 'https://vite-umber-six.vercel.app/all', 'https://crudmongo-2kgo.onrender.com/all']
+  origin: 'https://vite-qila8wr31-felipe-gmailcom.vercel.app'
 };
 app.use(cors(corsOptions));
-
-
 
 //db
 const db = require('./config/db')
