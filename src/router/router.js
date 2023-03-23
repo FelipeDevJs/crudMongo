@@ -14,10 +14,21 @@ router.get('/all', async (req,res)=>{
 })
 
 //delete user
-router.post('/delete/:id', async (req,res)=>{
-    const id = req.params.id
+router.get('/delete/:id', async (req,res)=>{
+  const id = req.params.id
+
+  try {
     const user = await User.findByIdAndDelete(id)
-    res.json('user deletado')
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' })
+    }
+
+    res.json({ message: 'Usuário deletado com sucesso.' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Ocorreu um erro ao deletar o usuário.' })
+  }
 })
 
 //update user
