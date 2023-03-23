@@ -75,8 +75,10 @@ router.post('/register', async (req,res,next)=>{
     try{
         const usernew = await newuser.save()
         console.log('user '+name+ ' salvo com sucesso')
+        res.status(200).send('Cadastrado com sucesso')
     }catch(error){
         console.error(error)
+        res.status(500).send('Erro ao realizar o cadastro')
     }
 })
 
