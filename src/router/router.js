@@ -4,7 +4,7 @@ const router = require('express').Router()
 const User = require('../model/user')
 
 router.get('/',(req,res)=>{
-    res.json('router')
+    res.json('router 2.0')
 })
 
 //liste all users
