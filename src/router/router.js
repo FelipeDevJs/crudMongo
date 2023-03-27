@@ -14,19 +14,44 @@ router.get('/all', async (req,res)=>{
 })
 
 //delete user
-router.get('/delete/:id', async (req,res)=>{
-    const id = req.params.id
+router.post('/delete/', async (req, res) => {
+  const { id } = req.body;
+  // Restante do código para lidar com o formulário enviado via POST
+  
+  // res.status(200).json({id})
+  
+  try {
     const user = await User.findByIdAndDelete(id)
-    res.json('user deletado')
-})
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' })
+    }
+
+    // res.json({ message: 'Usuário deletado com sucesso.' })
+    return res.redirect(req.headers.referer || '/');
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Ocorreu um erro ao deletar o usuário.' })
+  }
+});
+
 
 //update user
-router.post('/update/:id', async (req,res)=>{
-    const id = req.params.id
-    const {name, pwd} = req.body
-    const user = await User.findByIdAndUpdate(id, {name, pwd})
-    res.json(user)
-})
+router.post('/update', async (req, res) => {
+  const { id, name, pwd } = req.body;
+  
+  try {
+    const user = await User.findByIdAndUpdate(id, { name, pwd });
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' });
+    }
+    return res.redirect(req.headers.referer || '/');
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Ocorreu um erro ao atualizar o usuário.' });
+  }
+});
+
 
 //list one user
 router.get('/user/:id', async (req,res)=>{
@@ -37,22 +62,23 @@ router.get('/user/:id', async (req,res)=>{
 
 //registre user
 router.post('/register', async (req, res, next) => {
-    const { name, pwd } = req.body;
-  
-    if (!name || !pwd) {
-      return res.status(400).json({ message: 'Nome e senha são campos obrigatórios.' });
-    }
-  
-    try {
-      const newUser = new User({ name, pwd });
-      const savedUser = await newUser.save();
-      console.log(`Usuário ${name} salvo com sucesso.`);
-      return res.status(201).json({ message: 'Usuário registrado com sucesso.' });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Ocorreu um erro ao registrar o usuário.' });
-    }
+  const { name, pwd } = req.body;
+
+  if (!name || !pwd) {
+    return res.status(400).json({ message: 'Nome e senha são campos obrigatórios.' });
+  }
+
+  try {
+    const newUser = new User({ name, pwd });
+    const savedUser = await newUser.save();
+    console.log(`Usuário ${name} salvo com sucesso.`);
+    return res.redirect(req.headers.referer || '/');
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Ocorreu um erro ao registrar o usuário.' });
+  }
 });
+
   
 
 module.exports = router
